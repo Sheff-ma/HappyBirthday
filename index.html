@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Happy 20th Birthday!</title>
+    <style>
+        .auto-type, .auto-type2, .auto-type3 {
+            min-height: 40px; /* Prevent layout shift during typing */
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        .typed-cursor {
+            display: none; /* Hide the blinking cursor */
+        }
+    </style>
+</head>
+<body onload="startTypingSequence()">
+    <!-- Your HTML content remains the same -->
+    <div class="banner">
+        <div class="slider">
+            <img src="img/ad71c4b9-c0be-40d6-b952-696eabbb4856.jpeg" id="slideImg" alt="Birthday celebration">
+        </div>
+        <div class="overlay">
+            <div class="content">
+                <h1>Happy 20th Birthday My Baby</h1>
+                <div class="message">
+                    <p>Happy Birthday. 🎉</p>
+                    <p class="auto-type"></p>
+                    <p class="auto-type2"></p>
+                    <p class="auto-type3"></p>
+
+                    <div class="signature">
+                        <p>Happy Birthday, my heart.</p>
+                        <p>With all my love,</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script>
+        // Image slider function
+        var slideImg = document.getElementById("slideImg");
+        var images = [
+            "img/ad71c4b9-c0be-40d6-b952-696eabbb4856.jpeg",
+            "img/download (1).jpeg",
+            "img/download.jpeg"
+        ];
+        var currentIndex = 0;
+
+        function slider() {
+            currentIndex = (currentIndex + 1) % images.length;
+            slideImg.src = images[currentIndex];
+            setTimeout(slider, 3000);
+        }
+
+        // Typing animation sequence
+        function startTypingSequence() {
+            slider(); // Start image slider
+            
+            const messages = [
+                "As you begin a new decade of your life, I just want to thank God for letting me meet you and love you. You've been my rock through my worst and hardest moments—standing by me, loving me, and holding me up when I couldn't hold myself. You've seen me at my lowest and never gave up on me.",
+                "For that, I'll always be grateful. You've shown me what real love looks like—through patience, strength, and presence. Even when I feel like I don't give you enough, please know that my heart is all yours. And I love you deeply. We've had our moments—beautiful ones, messy ones, hard ones—but I wouldn't trade them for anything, because I got to live them with you. And I believe that the best is yet to come—for you, for me, and for us.",
+                "As you celebrate today, I pray that you become everything God has destined you to be—a woman of grace, strength, integrity, and light. I see greatness in you. I see a star waiting to shine beyond the skies. And I know, in just a little while, the world will witness everything I already see in you. I'm so proud of you. And I love you more than I can put into words. Thank you for being mine."
+            ];
+
+            const elements = [
+                document.querySelector('.auto-type'),
+                document.querySelector('.auto-type2'),
+                document.querySelector('.auto-type3')
+            ];
+
+            let currentIndex = 0;
+            let typedInstance;
+
+            function typeNextMessage() {
+                if (currentIndex >= messages.length) {
+                    // All messages done, wait 5 seconds and restart
+                    setTimeout(() => {
+                        // Clear all messages
+                        elements.forEach(el => el.innerHTML = '');
+                        currentIndex = 0;
+                        typeNextMessage();
+                    }, 5000);
+                    return;
+                }
+
+                // Clear current element
+                elements[currentIndex].innerHTML = '';
+
+                typedInstance = new Typed(elements[currentIndex], {
+                    strings: [messages[currentIndex]],
+                    typeSpeed: 50,
+                    backSpeed: 50,
+                    showCursor: false,
+                    onComplete: function() {
+                        // Wait a moment before starting to delete
+                        setTimeout(() => {
+                            typedInstance.destroy();
+                            currentIndex++;
+                            typeNextMessage();
+                        }, 1500);
+                    }
+                });
+            }
+
+            // Start the sequence
+            typeNextMessage();
+        }
+    </script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>
